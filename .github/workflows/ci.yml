@@ -1,0 +1,31 @@
+name: CI — ParkFlow (laboratório)
+
+# Executa a suíte de testes e publica as evidências (cobertura e rastreabilidade).
+# A cobertura é medida e exibida, mas NÃO reprova o pipeline: ela é um indicador didático, não um requisito.
+on:
+  push:
+  pull_request:
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: backend/requirements-dev.txt
+      - run: pip install -r backend/requirements-dev.txt
+      - name: Testes com cobertura de linhas e branches
+        working-directory: backend
+        run: pytest --cov=app --cov-branch --cov-report=term-missing --cov-report=xml
+      - name: Rastreabilidade requisito × teste
+        run: python scripts/rastreabilidade.py --saida rastreabilidade.md
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: evidencias
+          path: |
+            backend/coverage.xml
+            rastreabilidade.md

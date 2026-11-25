@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+*.egg-info/
+# Banco local e segredos
+*.db
+.env
+# Node
+node_modules/
+frontend/dist/
+*.tsbuildinfo
+# Entregas geradas
+dist/

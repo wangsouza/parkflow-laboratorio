@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+
+  --color-navy-950: #061229;
+  --color-navy-900: #0b1f44;
+  --color-navy-800: #12306a;
+  --color-navy-700: #1a418d;
+  --color-brand-50: #eef4ff;
+  --color-brand-100: #dbe7ff;
+  --color-brand-500: #3b74f0;
+  --color-brand-600: #1f57d6;
+  --color-brand-700: #1844b0;
+}
+
+html, body, #root { height: 100%; }
+body { @apply bg-slate-100 text-slate-800 antialiased; font-family: var(--font-sans); }
+
+/* Faixas de sinalização de pavimento (fundo do login) */
+.asfalto {
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(59,116,240,.35), transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, rgba(31,87,214,.30), transparent 60%),
+    linear-gradient(160deg, var(--color-navy-950), var(--color-navy-900) 55%, var(--color-navy-800));
+}
+.vagas {
+  background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.10) 0 3px, transparent 3px 72px);
+  mask-image: linear-gradient(to top, black, transparent 85%);
+}
+.placa-mono { font-family: var(--font-mono); letter-spacing: .12em; }
+
+@keyframes entrar { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.animar-entrada { animation: entrar .25s ease-out both; }
+@media (prefers-reduced-motion: reduce) { .animar-entrada { animation: none; } }
